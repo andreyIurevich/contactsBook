@@ -15,6 +15,10 @@ let store = createStore(
   ),
 );
 
+store.subscribe(() => {
+  localStorage['contacts'] = JSON.stringify(store.getState().contactList.contactsList);
+});
+
 render(
   <Provider store={store}>
     <App />

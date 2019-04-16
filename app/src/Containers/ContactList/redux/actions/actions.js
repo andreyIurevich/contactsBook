@@ -2,6 +2,10 @@ import { actionTypes } from './actionTypes.js'
 import axios from 'axios'
 import 'babel-polyfill'
 
+function selectContact(contactID) {
+
+}
+
 function getContactsNameList(response) {
   return response.data.map((contact) => {
     return {
@@ -21,7 +25,7 @@ function loadContacts() {
         const nameList = getContactsNameList(response);
         dispatch({ 
           type: actionTypes.LOADING_CONTACTS_SUCCESS,
-          payload: nameList
+          payload: response.data
         });
       }
     } catch (error) {
