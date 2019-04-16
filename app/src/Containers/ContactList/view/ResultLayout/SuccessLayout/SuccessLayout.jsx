@@ -15,20 +15,24 @@ class SuccessLayout extends React.Component {
       id: PropTypes.number,
       name: PropTypes.string
     })),
+
     b: PropTypes.func.isRequired,
+    selectContact: PropTypes.func.isRequired,
     activePage: PropTypes.number.isRequired,
     changeActiveContactsPage: PropTypes.func.isRequired,
   }
   
   createContactList(b) {
-    const { contactsList, activePage } = this.props;
+    const { contactsList, activePage, selectContact } = this.props;
     let resultList = [];
 
     for (let i = 0; i < 10; i++) {
       resultList.push(
         <p 
           className={b('list-item')} 
-          key={contactsList[activePage * 10 + i].id}>
+          key={contactsList[activePage * 10 + i].id}
+          onClick={ () => { selectContact(contactsList[activePage * 10 + i].id); } }
+          >
           {activePage * 10 + i + 1}. {contactsList[activePage * 10 + i].name}
         </p>
       );

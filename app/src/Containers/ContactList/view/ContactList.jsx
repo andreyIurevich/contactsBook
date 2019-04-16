@@ -22,6 +22,8 @@ class ContactList extends React.Component {
   static propTypes = {
     changeActiveContactsPage: PropTypes.func.isRequired,
     loadContacts: PropTypes.func.isRequired,
+    selectContact: PropTypes.func.isRequired,
+
     loadingContacts: PropTypes.bool.isRequired,
     loadingContactsResult: PropTypes.string.isRequired,
     activePage: PropTypes.number.isRequired,
@@ -43,7 +45,8 @@ class ContactList extends React.Component {
       loadingContactsResult, 
       contactsList,
       activePage,
-      changeActiveContactsPage
+      changeActiveContactsPage,
+      selectContact
     } = this.props;
 
     if (loadingContacts) {
@@ -64,6 +67,7 @@ class ContactList extends React.Component {
           b={b} 
           activePage={activePage}
           changeActiveContactsPage={changeActiveContactsPage}
+          selectContact={selectContact}
         />
       );
   }

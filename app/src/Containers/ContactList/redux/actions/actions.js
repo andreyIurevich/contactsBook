@@ -3,16 +3,12 @@ import axios from 'axios'
 import 'babel-polyfill'
 
 function selectContact(contactID) {
-
-}
-
-function getContactsNameList(response) {
-  return response.data.map((contact) => {
-    return {
-      id: contact.id,
-      name: contact.name
-    };
-  });
+  return (dispatch) => {
+    dispatch({
+      type: actionTypes.SELECT_CONTACT,
+      payload: contactID
+    });
+  }
 }
 
 function loadContacts() {
@@ -22,7 +18,6 @@ function loadContacts() {
       const response = await axios.get('http://demo.sibers.com/users');
       dispatch({ type: actionTypes.LOADING_CONTACTS, payload: false });
       if (response.status === 200) {
-        const nameList = getContactsNameList(response);
         dispatch({ 
           type: actionTypes.LOADING_CONTACTS_SUCCESS,
           payload: response.data
@@ -41,4 +36,4 @@ function changeActiveContactsPage(pageIndex) {
   };
 }
 
-export { loadContacts, changeActiveContactsPage  };
+export { loadContacts, changeActiveContactsPage, selectContact };
