@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux'
 
 import { block } from 'bem-cn'
 import ContactList from './Containers/ContactList/view/ContactList.jsx'
+import ContactDesription from './Containers/ContactDescription/view/ContactDescription.jsx'
 
 import './default.css'
 import './fonts/San Francisco Display Light/SanFranciscoDisplayLight.css'
@@ -19,6 +20,7 @@ class App extends React.Component {
     return (
       <div className={b()}>
         <ContactList />
+        <ContactDesription />
       </div>
     );
   }
