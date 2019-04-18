@@ -6,8 +6,26 @@
   //min-width: 15rem
   font-family: 'San Francisco Display Light'
   padding: 0 1rem
+  max-width: 30rem
 
   &__title
     font-family: 'San Francisco Display Medium'
     padding-top: 1rem
     padding-bottom: 1rem
+  
+  &__page-switcher
+    display: flex
+    margin-bottom: 1rem
+
+  &__switch-item
+    padding-right: 0.5rem
+    cursor: pointer
+
+  &__switch-item:nth-child(1),
+  &__switch-item:nth-child(2)
+    border-right: 1px solid #000000
+  
+  &__switch-item:nth-child(2),
+  &__switch-item:nth-child(3)
+    padding-left: 0.5rem
+
