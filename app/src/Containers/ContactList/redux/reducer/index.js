@@ -43,6 +43,12 @@ export default function contactsList(state = initialState, action) {
        selectContact: action.payload
      }
     
+     case actionTypes.UPDATE_CONTACT_LIST:
+      return {
+        ...state,
+        contactsList: action.payload
+      }
+    
     default:
      return state;
   }

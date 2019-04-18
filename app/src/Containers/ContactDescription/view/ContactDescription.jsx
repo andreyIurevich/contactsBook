@@ -82,7 +82,7 @@ class ContactDescription extends React.Component {
     }
 
     switch (activePage) {
-      case 'Info': 
+      case 'Info':
         return (
           <PersonalInfo 
             contactInfo={this.getContactInfo()}
@@ -114,6 +114,7 @@ class ContactDescription extends React.Component {
     const b = block('contact-description');
     const { activePage, title } = this.state;
     const activeLayout = this.createActiveLayout();
+    const { selectContact } = this.props;
     return (
       <div className={b()}>
         <p className={b('title')}>{title}</p>

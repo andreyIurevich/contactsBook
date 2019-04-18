@@ -23,10 +23,13 @@ class ContactList extends React.Component {
     changeActiveContactsPage: PropTypes.func.isRequired,
     loadContacts: PropTypes.func.isRequired,
     selectContact: PropTypes.func.isRequired,
+    updateContact: PropTypes.func.isRequired,
 
     loadingContacts: PropTypes.bool.isRequired,
     loadingContactsResult: PropTypes.string.isRequired,
     activePage: PropTypes.number.isRequired,
+    updatedContact: PropTypes.object,
+
     contactsList: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number,
@@ -75,6 +78,11 @@ class ContactList extends React.Component {
   render() {
     const b = block('contact-list');
     const resultLayout = this.makeResultLayout(b);
+    const { updatedContact, updateContact } = this.props;
+
+    if (updatedContact !== null) {
+      updateContact(updatedContact);
+    }
 
     return (
       <div className={b()}>
@@ -96,6 +104,7 @@ function mapStateToProps(state) {
     loadingContactsResult: state.contactList.loadingContactsResult,
     contactsList: state.contactList.contactsList,
     activePage: state.contactList.activePage,
+    updatedContact: state.descriptionContact.updateContact,
   };
 }
 

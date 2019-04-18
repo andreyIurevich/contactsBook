@@ -36,4 +36,21 @@ function changeActiveContactsPage(pageIndex) {
   };
 }
 
-export { loadContacts, changeActiveContactsPage, selectContact };
+function updateContact(newContact) {
+  return (dispatch, getState) => {
+    let contactsList = getState().contactList.contactsList;
+    let selectContact = contactsList.filter((contact) => contact.id === newContact.id)[0];
+    Object.assign(selectContact, newContact);
+    dispatch({
+      type: actionTypes.UPDATE_CONTACT_LIST,
+      payload: contactsList
+    });
+  }
+}
+
+export { 
+        loadContacts, 
+        changeActiveContactsPage, 
+        selectContact,
+        updateContact
+      };
