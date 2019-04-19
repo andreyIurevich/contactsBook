@@ -28,6 +28,10 @@
       background-color: #f3f3f3
       border-radius: 0.2rem
   
+  &__search-container
+    display: flex
+    justify-content: space-between
+  
   &__search-input
     margin-top: 1rem
     margin-left: 1rem
@@ -38,6 +42,7 @@
     background-size: contain
     background-repeat: no-repeat
     background-position: 99%
+    width: 100%
     &:focus
       outline: none
   
@@ -45,13 +50,16 @@
     background-color: transparent
     border: none
     font-size: 1.1rem
-    margin-left: 0.5rem
+    margin-right: 1rem
+    margin-left: 1rem
     outline: none
+    align-self: flex-end
     &:hover
       box-shadow: 2px 2px 10px -3px
       outline: 1px solid #dcdcdc
       cursor: pointer
     &:active
       box-shadow: none
+  
 
   

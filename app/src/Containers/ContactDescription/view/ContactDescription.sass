@@ -1,9 +1,8 @@
 .contact-description
   background: #ffffff
   margin-top: 2rem
-  margin-left: 0.5rem
+  margin-left: 1rem
   border-radius: 0.5rem
-  //min-width: 15rem
   font-family: 'San Francisco Display Light'
   padding: 0 1rem
   max-width: 30rem
@@ -16,6 +15,10 @@
   &__page-switcher
     display: flex
     margin-bottom: 1rem
+  
+  &__user-message
+    margin-bottom: 1rem
+    margin-right: 1rem
 
   &__switch-item
     padding-right: 0.5rem
@@ -28,4 +31,10 @@
   &__switch-item:nth-child(2),
   &__switch-item:nth-child(3)
     padding-left: 0.5rem
+
+@media screen and (max-width: 414px)
+  .contact-description
+    margin-left: 0rem
+    width: 72%
+    margin-bottom: 1rem
 

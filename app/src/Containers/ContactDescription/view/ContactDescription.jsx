@@ -71,13 +71,13 @@ class ContactDescription extends React.Component {
     });
   }
 
-  createActiveLayout() {
+  createActiveLayout(b) {
     const { activePage } = this.state;
     const { selectContact } = this.props;
 
     if ( selectContact === -1 ) {
       return (
-        <UserMessage />
+        <UserMessage b={b}/>
       );
     }
 
@@ -113,7 +113,7 @@ class ContactDescription extends React.Component {
   render() {
     const b = block('contact-description');
     const { activePage, title } = this.state;
-    const activeLayout = this.createActiveLayout();
+    const activeLayout = this.createActiveLayout(b);
     const { selectContact } = this.props;
     return (
       <div className={b()}>
