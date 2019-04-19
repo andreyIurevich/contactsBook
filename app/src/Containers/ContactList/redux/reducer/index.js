@@ -5,6 +5,7 @@ const initialState = {
   loadingContactsResult: 'not known',
   activePage: 0,
   selectContact: -1,
+  isSortByName: false,
   searchResult: [],
   contactsList: [],
 };
@@ -54,6 +55,12 @@ export default function contactsList(state = initialState, action) {
       return {
         ...state,
         searchResult: action.payload
+      }
+     
+     case actionTypes.CHANGE_SORT_STATUS:
+      return {
+        ...state,
+        isSortByName: action.payload
       }
     
     default:

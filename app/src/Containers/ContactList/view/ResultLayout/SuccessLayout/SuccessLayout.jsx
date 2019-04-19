@@ -31,8 +31,10 @@ class SuccessLayout extends React.Component {
     changeActiveContactsPage: PropTypes.func.isRequired,
     selectContact: PropTypes.func.isRequired,
     searchContact: PropTypes.func.isRequired,
+    sortingContacts: PropTypes.func.isRequired,
 
     activePage: PropTypes.number.isRequired,
+    isSortByName: PropTypes.bool.isRequired,
   }
 
   handleSearchChange(event) {
@@ -90,7 +92,8 @@ class SuccessLayout extends React.Component {
     const b = this.props.b;
     const contactList = this.createContactList(b);
     const pageSwitcher = this.createPageSwitcher(b);
-    
+    const { isSortByName, sortingContacts } = this.props;
+
     return (
       <div>
         <div className={b('search-container')}>
@@ -102,6 +105,15 @@ class SuccessLayout extends React.Component {
             value={this.state.searchName}
             onChange={this.handleSearchChange}
           />
+          <button
+            className={b('sort-btn')}
+            onClick={() => { sortingContacts() }}>
+            {
+              !isSortByName ? 
+              <i class="fas fa-sort-alpha-down"></i> :
+              <i class="fas fa-random"></i>
+            }
+          </button>
         </div>
         <div className={b('name-list')}>
           {contactList}

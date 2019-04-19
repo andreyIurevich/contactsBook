@@ -50,7 +50,7 @@ function updateContact(newContact) {
 
 function searchContact(searchName) {
   return (dispatch, getState) => {
-    let contactsList = getState().contactList.contactsList;
+    let contactsList = [...getState().contactList.contactsList];
     if (searchName.length === 0) {
       dispatch({
         type: actionTypes.SEARCH_CONTACT,
@@ -68,10 +68,46 @@ function searchContact(searchName) {
   }
 }
 
+function sortingContacts() {
+  return (dispatch, getState) => {
+    const isSortingByName = getState().contactList.isSortByName;
+    const contactList = [...getState().contactList.contactsList];
+
+    if (isSortingByName) {
+      dispatch({
+        type: actionTypes.CHANGE_SORT_STATUS,
+        payload: false,
+      });
+      dispatch({
+        type: actionTypes.SEARCH_CONTACT,
+        payload: []
+      });
+    } else {
+      dispatch({
+        type: actionTypes.CHANGE_SORT_STATUS,
+        payload: true,
+      });
+      contactList.sort(function(a, b){
+        var nameA=a.name.toLowerCase(), nameB=b.name.toLowerCase();
+        if (nameA < nameB) 
+          return -1
+        if (nameA > nameB)
+          return 1
+        return 0 
+      });
+      dispatch({
+        type: actionTypes.SEARCH_CONTACT,
+        payload: contactList
+      });
+    }
+  }
+}
+
 export { 
         loadContacts, 
         changeActiveContactsPage, 
         selectContact,
         updateContact,
-        searchContact
+        searchContact,
+        sortingContacts
       };

@@ -25,6 +25,7 @@ class ContactList extends React.Component {
     selectContact: PropTypes.func.isRequired,
     updateContact: PropTypes.func.isRequired,
     searchContact: PropTypes.func.isRequired,
+    sortingContacts: PropTypes.func.isRequired,
 
     loadingContacts: PropTypes.bool.isRequired,
     loadingContactsResult: PropTypes.string.isRequired,
@@ -58,7 +59,9 @@ class ContactList extends React.Component {
       changeActiveContactsPage,
       selectContact,
       searchContact,
-      searchResult
+      searchResult,
+      isSortByName,
+      sortingContacts
     } = this.props;
 
     if (loadingContacts) {
@@ -82,6 +85,8 @@ class ContactList extends React.Component {
           selectContact={selectContact}
           searchContact={searchContact}
           searchResult={searchResult}
+          isSortByName={isSortByName}
+          sortingContacts={sortingContacts}
         />
       );
   }
@@ -117,6 +122,7 @@ function mapStateToProps(state) {
     activePage: state.contactList.activePage,
     updatedContact: state.descriptionContact.updateContact,
     searchResult: state.contactList.searchResult,
+    isSortByName: state.contactList.isSortByName,
   };
 }
 
