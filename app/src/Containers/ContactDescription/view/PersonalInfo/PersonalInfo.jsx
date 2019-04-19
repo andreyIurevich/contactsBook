@@ -141,8 +141,10 @@ class PersonalInfo extends React.Component {
             onChange={this.handleChange} 
           />
         </div>
-        <button 
+        <button
+          className={b('save-btn')} 
           onClick={() => { this.props.updateContact(this.getUpdatedValues()) } }>
+          <i className="fas fa-cloud-download-alt"></i>
           Save
         </button>
       </div>

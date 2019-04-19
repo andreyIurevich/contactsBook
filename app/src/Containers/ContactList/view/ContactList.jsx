@@ -24,16 +24,23 @@ class ContactList extends React.Component {
     loadContacts: PropTypes.func.isRequired,
     selectContact: PropTypes.func.isRequired,
     updateContact: PropTypes.func.isRequired,
+    searchContact: PropTypes.func.isRequired,
 
     loadingContacts: PropTypes.bool.isRequired,
     loadingContactsResult: PropTypes.string.isRequired,
     activePage: PropTypes.number.isRequired,
     updatedContact: PropTypes.object,
 
+
     contactsList: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number,
         name: PropTypes.string
+    })),
+
+    searchResult: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string
     })),
   }
 
@@ -49,7 +56,9 @@ class ContactList extends React.Component {
       contactsList,
       activePage,
       changeActiveContactsPage,
-      selectContact
+      selectContact,
+      searchContact,
+      searchResult
     } = this.props;
 
     if (loadingContacts) {
@@ -71,6 +80,8 @@ class ContactList extends React.Component {
           activePage={activePage}
           changeActiveContactsPage={changeActiveContactsPage}
           selectContact={selectContact}
+          searchContact={searchContact}
+          searchResult={searchResult}
         />
       );
   }
@@ -105,6 +116,7 @@ function mapStateToProps(state) {
     contactsList: state.contactList.contactsList,
     activePage: state.contactList.activePage,
     updatedContact: state.descriptionContact.updateContact,
+    searchResult: state.contactList.searchResult,
   };
 }
 

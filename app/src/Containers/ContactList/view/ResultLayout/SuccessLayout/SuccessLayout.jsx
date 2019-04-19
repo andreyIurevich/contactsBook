@@ -7,7 +7,14 @@ class SuccessLayout extends React.Component {
 
   constructor(props) {
     super(props);
+
+    this.state = {
+      search: '',
+    }
+
     this.createContactList = this.createContactList.bind(this);
+    this.handleSearchChange = this.handleSearchChange.bind(this);
+
   }
 
   static propTypes = {
@@ -15,25 +22,43 @@ class SuccessLayout extends React.Component {
       id: PropTypes.number,
       name: PropTypes.string
     })),
+    searchResult: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string
+    })),
 
     b: PropTypes.func.isRequired,
-    selectContact: PropTypes.func.isRequired,
-    activePage: PropTypes.number.isRequired,
     changeActiveContactsPage: PropTypes.func.isRequired,
+    selectContact: PropTypes.func.isRequired,
+    searchContact: PropTypes.func.isRequired,
+
+    activePage: PropTypes.number.isRequired,
+  }
+
+  handleSearchChange(event) {
+    const { searchContact } = this.props;
+ 
+    searchContact(event.target.value);
+
+    this.setState({
+      [event.target.name]: event.target.value
+    });
   }
   
   createContactList(b) {
-    const { contactsList, activePage, selectContact } = this.props;
+    const { contactsList, activePage, selectContact, searchResult } = this.props;
+    const showContacts = searchResult.length !== 0 ? searchResult : contactsList;
     let resultList = [];
+    const contactsPageCount = showContacts.length < 10 ? showContacts.length : 10; 
 
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < contactsPageCount; i++) {
       resultList.push(
         <p 
           className={b('list-item')} 
-          key={contactsList[activePage * 10 + i].id}
-          onClick={ () => { selectContact(contactsList[activePage * 10 + i].id); } }
+          key={showContacts[activePage * 10 + i].id}
+          onClick={ () => { selectContact(showContacts[activePage * 10 + i].id); } }
           >
-          {activePage * 10 + i + 1}. {contactsList[activePage * 10 + i].name}
+          {activePage * 10 + i + 1}. {showContacts[activePage * 10 + i].name}
         </p>
       );
     }
@@ -43,9 +68,10 @@ class SuccessLayout extends React.Component {
 
   createPageSwitcher(b) {
     const pageList = [];
-    const { contactsList, activePage, changeActiveContactsPage } = this.props;
+    const { contactsList, activePage, changeActiveContactsPage, searchResult } = this.props;
+    const showContacts = searchResult.length !== 0 ? searchResult : contactsList;
 
-    for (let i = 0; i < Math.floor(contactsList.length / 10); i++) {
+    for (let i = 0; i < Math.floor(showContacts.length / 10); i++) {
       pageList.push(
         <div
           key={i} 
@@ -67,6 +93,16 @@ class SuccessLayout extends React.Component {
     
     return (
       <div>
+        <div className={b('search-container')}>
+          <input
+            className={b('search-input')} 
+            type="text"
+            name="search"
+            placeholder="Search by name"
+            value={this.state.searchName}
+            onChange={this.handleSearchChange}
+          />
+        </div>
         <div className={b('name-list')}>
           {contactList}
         </div>

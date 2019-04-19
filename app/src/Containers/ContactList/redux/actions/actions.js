@@ -48,9 +48,30 @@ function updateContact(newContact) {
   }
 }
 
+function searchContact(searchName) {
+  return (dispatch, getState) => {
+    let contactsList = getState().contactList.contactsList;
+    if (searchName.length === 0) {
+      dispatch({
+        type: actionTypes.SEARCH_CONTACT,
+        payload: contactsList
+      });
+    } else {
+      const searchResult = contactsList.filter(contact => contact.name.includes(searchName));
+      if (searchResult.length !== 0) {
+        dispatch({
+          type: actionTypes.SEARCH_CONTACT,
+          payload: searchResult
+        });
+      } 
+    }
+  }
+}
+
 export { 
         loadContacts, 
         changeActiveContactsPage, 
         selectContact,
-        updateContact
+        updateContact,
+        searchContact
       };

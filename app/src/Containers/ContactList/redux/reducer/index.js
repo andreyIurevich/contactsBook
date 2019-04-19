@@ -5,6 +5,7 @@ const initialState = {
   loadingContactsResult: 'not known',
   activePage: 0,
   selectContact: -1,
+  searchResult: [],
   contactsList: [],
 };
 
@@ -47,6 +48,12 @@ export default function contactsList(state = initialState, action) {
       return {
         ...state,
         contactsList: action.payload
+      }
+    
+     case actionTypes.SEARCH_CONTACT:
+      return {
+        ...state,
+        searchResult: action.payload
       }
     
     default:
