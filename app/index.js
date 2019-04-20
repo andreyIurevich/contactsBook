@@ -5,9 +5,9 @@ import { compose, createStore, applyMiddleware } from 'redux'
 import { HashRouter, Route } from 'react-router-dom'
 import thunk from 'redux-thunk'
 import { combineReducers } from 'redux'
-import contactList from './src/Containers/ContactList/redux/reducer/index'
-import descriptionContact from './src/Containers/ContactDescription/view/PersonalInfo/redux/reducer/index'
-import App from './src/App.jsx'
+import contactList from './Containers/ContactList/redux/reducer/index'
+import descriptionContact from './Containers/ContactDescription/view/PersonalInfo/redux/reducer/index'
+import App from './Containers/App/App.jsx'
 
 const rootReducer = combineReducers({
   contactList,
