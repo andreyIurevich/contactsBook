@@ -7,7 +7,10 @@ const initialState = {
   selectContact: -1,
   isSortByName: false,
   searchResult: [],
-  contactsList: [],
+  contactsList: 
+      localStorage.getItem('contacts') ? 
+        JSON.parse(localStorage['contacts']) :
+        []
 };
 
 export default function contactsList(state = initialState, action) {

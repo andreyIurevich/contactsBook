@@ -47,7 +47,13 @@ class ContactList extends React.Component {
 
   componentDidMount() {
     const { loadContacts } = this.props;
-    loadContacts();
+
+    const isLoadingContactsFromRemote = 
+      localStorage.getItem('contacts') === null ||
+      localStorage.getItem('contacts') !== null && 
+      JSON.parse(localStorage.getItem('contacts')).length === 0;
+    
+    if (isLoadingContactsFromRemote) loadContacts();
   }
 
   makeResultLayout(b) {
@@ -66,29 +72,29 @@ class ContactList extends React.Component {
 
     if (loadingContacts) {
       return (
-        <WaitLayout />
+        <WaitLayout b={b}/>
       );
+    } else {
+      if (loadingContactsResult === 'error') {
+        return (
+          <ErrorLayout b={b}/>
+        );
+      } else {
+        return (
+          <SuccessLayout 
+            contactsList={contactsList} 
+            b={b} 
+            activePage={activePage}
+            changeActiveContactsPage={changeActiveContactsPage}
+            selectContact={selectContact}
+            searchContact={searchContact}
+            searchResult={searchResult}
+            isSortByName={isSortByName}
+            sortingContacts={sortingContacts}
+          />
+        );
+      }
     }
-
-    if (loadingContactsResult === 'error') 
-      return (
-        <ErrorLayout />
-      );
-    
-    if (!loadingContacts && loadingContactsResult === 'success')
-      return (
-        <SuccessLayout 
-          contactsList={contactsList} 
-          b={b} 
-          activePage={activePage}
-          changeActiveContactsPage={changeActiveContactsPage}
-          selectContact={selectContact}
-          searchContact={searchContact}
-          searchResult={searchResult}
-          isSortByName={isSortByName}
-          sortingContacts={sortingContacts}
-        />
-      );
   }
 
   render() {

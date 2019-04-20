@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ErrorLayout = () => 
-  <p>Loading error!</p>
+const ErrorLayout = ({ b }) => 
+  <p className={b('message')}>Loading error!</p>
 
 export default ErrorLayout

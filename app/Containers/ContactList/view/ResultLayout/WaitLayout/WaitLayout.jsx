@@ -1,6 +1,6 @@
 import React from 'react'
 
-const WaitLayout = () => 
-  <p>Loading Contacts. Please wait!</p>
+const WaitLayout = ({ b }) => 
+  <p className={b('message')}>Loading Contacts. Please wait!</p>
 
 export default WaitLayout
