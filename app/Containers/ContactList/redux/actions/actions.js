@@ -3,28 +3,26 @@ import axios from 'axios'
 import 'babel-polyfill'
 
 function selectContact(contactID) {
-  return (dispatch) => {
-    dispatch({
-      type: actionTypes.SELECT_CONTACT,
-      payload: contactID
-    });
+  return  {
+    type: actionTypes.SELECT_CONTACT,
+    payload: contactID
   }
 }
 
 function loadContacts() {
   return async (dispatch, getState) => {
-    try {
-      dispatch({ type: actionTypes.LOADING_CONTACTS, payload: true });
-      const response = await axios.get('http://demo.sibers.com/users');
-      dispatch({ type: actionTypes.LOADING_CONTACTS, payload: false });
-      if (response.status === 200) {
-        dispatch({ 
-          type: actionTypes.LOADING_CONTACTS_SUCCESS,
-          payload: response.data
-        });
-      }
-    } catch (error) {
-      console.log(error);
+    dispatch({ type: actionTypes.LOADING_CONTACTS, payload: true });
+    const response = await axios.get('http://demo.sibers.com/users');
+    dispatch({ type: actionTypes.LOADING_CONTACTS, payload: false });
+    if (response.status === 200) {
+      dispatch({ 
+        type: actionTypes.LOADING_CONTACTS_SUCCESS,
+        payload: response.data
+      });
+    } else {
+      dispatch({
+        type: actionTypes.LOADING_CONTACTS_FAILURE,
+      }); 
     }
   };
 }
