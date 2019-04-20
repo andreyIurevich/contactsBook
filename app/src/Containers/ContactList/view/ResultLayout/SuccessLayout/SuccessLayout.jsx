@@ -110,8 +110,8 @@ class SuccessLayout extends React.Component {
             onClick={() => { sortingContacts() }}>
             {
               !isSortByName ? 
-              <i class="fas fa-sort-alpha-down"></i> :
-              <i class="fas fa-random"></i>
+              <i className="fas fa-sort-alpha-down"></i> :
+              <i className="fas fa-random"></i>
             }
           </button>
         </div>

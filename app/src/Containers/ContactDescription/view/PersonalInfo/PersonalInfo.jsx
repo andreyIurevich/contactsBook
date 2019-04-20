@@ -54,21 +54,29 @@ class PersonalInfo extends React.Component {
   }
 
   getUpdatedValues() {
+    const { contactInfo } = this.props;
+
     return {
       id: this.props.contactInfo.id,
       name: this.state.name,
       username: this.state.username,
       email: this.state.email,
-      location: this.state.location,
+      address: {
+        ...contactInfo.address,
+        city: this.state.location.split(', ')[2],
+        state: this.state.location.split(', ')[1],
+        country: this.state.location.split(', ')[0],
+      },
       phone: this.state.phone,
       website: this.state.website,
-      company: this.state.company
+      company: { name: this.state.company }
     };
   }
 
   render(){
     const b = block('personal-info');
     const { contactInfo } = this.props;
+    
     return (
       <div className={b('container')}>
         <div className={b('item')}>
@@ -77,7 +85,7 @@ class PersonalInfo extends React.Component {
             className={b('item-text')}
             type="text" 
             name="name" 
-            value={this.state.name} 
+            value={this.state.name || ''} 
             onChange={this.handleChange} 
           />
         </div>
@@ -87,7 +95,7 @@ class PersonalInfo extends React.Component {
             className={b('item-text')}
             type="text" 
             name="username" 
-            value={this.state.username} 
+            value={this.state.username || ''} 
             onChange={this.handleChange} 
           />
         </div>
@@ -96,8 +104,8 @@ class PersonalInfo extends React.Component {
           <input
             className={b('item-text')}
             type="text" 
-            name="username" 
-            value={this.state.email} 
+            name="email" 
+            value={this.state.email || ''} 
             onChange={this.handleChange} 
           />
         </div>
@@ -106,8 +114,9 @@ class PersonalInfo extends React.Component {
           <input
             className={b('item-text')}
             type="text" 
-            name="username" 
-            value={this.state.location} 
+            name="location"
+            placeholder="Country, state, city" 
+            value={this.state.location || ''} 
             onChange={this.handleChange} 
           />
         </div>
@@ -116,8 +125,8 @@ class PersonalInfo extends React.Component {
           <input
             className={b('item-text')}
             type="text" 
-            name="username" 
-            value={this.state.phone} 
+            name="phone" 
+            value={this.state.phone || ''} 
             onChange={this.handleChange} 
           />
         </div>
@@ -126,8 +135,8 @@ class PersonalInfo extends React.Component {
           <input
             className={b('item-text')}
             type="text" 
-            name="username" 
-            value={this.state.website} 
+            name="website" 
+            value={this.state.website || ''} 
             onChange={this.handleChange} 
           />
         </div>
@@ -136,8 +145,8 @@ class PersonalInfo extends React.Component {
           <input
             className={b('item-text')}
             type="text" 
-            name="username" 
-            value={this.state.company} 
+            name="company" 
+            value={this.state.company || ''} 
             onChange={this.handleChange} 
           />
         </div>
